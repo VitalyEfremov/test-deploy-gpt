@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invitation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8e1e7;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .frame {
+            text-align: center;
+            background: white;
+            border: 2px solid #ff6f91;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .frame h1 {
+            margin-bottom: 30px;
+            color: #ff6f91;
+        }
+        .frame button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6f91;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+        }
+        .frame button:focus {
+            outline: none;
+        }
+        #yesButton {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <h1>Will you be my valentine?</h1>
+        <button id="yesButton">Yes</button>
+        <button id="noButton">No</button>
+        <p id="message" style="display:none; color: #ff6f91; font-size: 18px;">I love you</p>
+    </div>
+    <script>
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+        const message = document.getElementById('message');
+
+        noButton.addEventListener('mouseover', () => {
+            const offset = 100;
+            const frameRect = document.querySelector('.frame').getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            let newX = buttonRect.left + (Math.random() - 0.5) * offset;
+            let newY = buttonRect.top + (Math.random() - 0.5) * offset;
+
+            // Ensure the button stays within the frame
+            newX = Math.max(frameRect.left, Math.min(newX, frameRect.right - buttonRect.width));
+            newY = Math.max(frameRect.top, Math.min(newY, frameRect.bottom - buttonRect.height));
+
+            noButton.style.transform = `translate(${newX - buttonRect.left}px, ${newY - buttonRect.top}px)`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            message.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
